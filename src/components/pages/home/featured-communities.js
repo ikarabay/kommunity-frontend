@@ -14,25 +14,22 @@ const FeaturedCommunities = ({ communityList }) => (
     <div className="flex flex-wrap justify-between">
       {communityList.map(({ uuid, name, desc }) => (
         <div key={uuid} className="w-3/12 px-4">
-          <Link
-                to={`/community/${uuid}`}
-                >
-
+          <Link to={`/community/${uuid}`}>
             <Card applyPadding={false} shadow="md">
               <div className="bg-paleGrey pt-4">
                 <div
-                className="bg-cover inline-block w-20 h-20 overflow-hidden rounded-4 border-white border-8"
-                style={{
-                  backgroundImage: `url(${avatarUrl})`,
-                  transform: 'translateY(24px)',
-                }}
+                  className="bg-cover inline-block w-20 h-20 overflow-hidden rounded-4 border-white border-8"
+                  style={{
+                    backgroundImage: `url(${avatarUrl})`,
+                    transform: 'translateY(24px)',
+                  }}
               />
               </div>
               <div className="pt-12 pb-6 px-6">
                 <Link
-                color="text-dark hover:text-primary"
-                extraClassName="font-bold"
-                to={`/community/${uuid}`}
+                  color="text-dark hover:text-primary"
+                  extraClassName="font-bold"
+                  to={`/community/${uuid}`}
                 >
                   {name}
                 </Link>
