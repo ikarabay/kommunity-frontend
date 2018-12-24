@@ -69,13 +69,14 @@ class UIButton extends React.Component {
 UIButton.defaultProps = {
   disabled: false,
   groupOrder: 'none',
+  size: 'medium',
 };
 
 UIButton.propTypes = {
   disabled: PropTypes.bool,
   extraClassName: PropTypes.string,
   groupOrder: PropTypes.oneOf(['first', 'middle', 'last', 'none']),
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onClick: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium', 'large']).isRequired,
   styleType: PropTypes.oneOf(['primary', 'secondary', 'outline', 'danger', 'plain']).isRequired,

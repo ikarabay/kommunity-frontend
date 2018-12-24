@@ -4291,6 +4291,14 @@ table {
   visibility: hidden;
 }
 
+.group:hover .group-hover\:visible {
+  visibility: visible;
+}
+
+.group:hover .group-hover\:invisible {
+  visibility: hidden;
+}
+
 .whitespace-normal {
   white-space: normal;
 }
@@ -4515,6 +4523,12 @@ table {
   }
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 .border-box {
   box-sizing: border-box;
 }
@@ -4535,12 +4549,12 @@ table {
   --paleGrey: #f4f6f8;
   --white: #fff;
   --green: #19a560;
-  --faint-green: #19a560;
   --yellow: #edc200;
-  --faint-yellow: #fffceb;
   --red: #ff3e3e;
-  --faint-red: #ffebeb;
   --blue: #08aeea;
+  --faint-green: #19a560;
+  --faint-yellow: #fffceb;
+  --faint-red: #ffebeb;
   --faint-blue: #eaf6fc;
 }
 
@@ -4558,12 +4572,10 @@ table {
   --green: #19a560;
   --yellow: #edc200;
   --red: #ff3e3e;
-  --faint-green: #19a560;
-  --yellow: #edc200;
-  --faint-yellow: #fffceb;
-  --red: #ff3e3e;
-  --faint-red: #ffebeb;
   --blue: #08aeea;
+  --faint-green: #19a560;
+  --faint-yellow: #fffceb;
+  --faint-red: #ffebeb;
   --faint-blue: #eaf6fc;
 }
 

@@ -782,7 +782,7 @@ module.exports = {
     tracking: [],
     userSelect: [],
     verticalAlign: [],
-    visibility: [],
+    visibility: ['group-hover'],
     whitespace: [],
     width: ['responsive'],
     zIndex: [],

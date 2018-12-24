@@ -59,7 +59,7 @@ class Header extends React.Component {
 
     return (
       <div>
-        <header className="flex items-center my-6">
+        <header className="flex items-center py-6">
           <Logo extraClassName="-mt-3" />
           <div className="flex flex-grow">
             <Link extraClassName={classes.link} to="/communities">

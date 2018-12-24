@@ -26,7 +26,7 @@ const style = {
 class UIInput extends Component {
   state = {
     // eslint-disable-next-line react/destructuring-assignment
-    value: this.props.value,
+    // value: this.props.value,
   };
 
   onChangeHandler(e, onChange) {
@@ -55,13 +55,13 @@ class UIInput extends Component {
       iconRight,
       id,
       extraWrapperClassName,
+      htmlRef,
       required,
       pattern,
       name,
       minLength,
+      value,
     } = this.props;
-
-    const { value } = this.state;
 
     const wrapperClass = cls(style.wrapper, extraWrapperClassName);
     const inputClass = cls(style.common, extraClassName, {
@@ -91,6 +91,7 @@ class UIInput extends Component {
         <div className={wrapperClass}>
           {iconLeftElem}
           <input
+            ref={htmlRef}
             placeholder={placeholder}
             type={type}
             className={inputClass}
@@ -132,6 +133,7 @@ UIInput.propTypes = {
   extraClassName: PropTypes.string,
   extraWrapperClassName: PropTypes.string,
   helpText: PropTypes.string,
+  htmlRef: PropTypes.object,
   iconLeft: PropTypes.element,
   iconRight: PropTypes.element,
   id: PropTypes.string.isRequired,
