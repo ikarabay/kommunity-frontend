@@ -132,7 +132,7 @@ class MessageList extends React.Component {
 MessageList.propTypes = {
   channelUUID: PropTypes.string,
   listRef: PropTypes.instanceOf(PropTypes.node),
-  messages: PropTypes.shapeOf({
+  messages: PropTypes.shape({
     getMessagesForChannel: PropTypes.func,
     subscribeToMore: PropTypes.func,
   }),

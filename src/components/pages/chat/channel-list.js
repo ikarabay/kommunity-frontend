@@ -22,7 +22,7 @@ const ChannelList = ({ channels }) => {
 };
 
 ChannelList.propTypes = {
-  channels: PropTypes.shapeOf({
+  channels: PropTypes.shape({
     getChannels: PropTypes.func,
     loading: PropTypes.boolean,
   }),
