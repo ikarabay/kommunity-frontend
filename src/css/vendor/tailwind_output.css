@@ -4991,21 +4991,8 @@ table {
   color: var(--primaryDark);
 }
 
-<<<<<<< HEAD
-.group:hover .group-hover\:visible {
-  visibility: visible;
-}
-
-.group:hover .group-hover\:invisible {
-  visibility: hidden;
-}
-
-.whitespace-normal {
-  white-space: normal;
-=======
 .placeholder\:text-primaryDark::-ms-input-placeholder {
   color: var(--primaryDark);
->>>>>>> 42ee991f2fadaf8c81b5ccb96e0be2d65926cbe2
 }
 
 .placeholder\:text-primaryDark::placeholder {
@@ -5200,74 +5187,20 @@ table {
   color: var(--yellow);
 }
 
-<<<<<<< HEAD
-html,
-body,
-#root {
-  height: 100%;
-}
-
-.border-box {
-  box-sizing: border-box;
-=======
 .placeholder\:text-yellow::placeholder {
   color: var(--yellow);
->>>>>>> 42ee991f2fadaf8c81b5ccb96e0be2d65926cbe2
 }
 
 .placeholder\:text-red::-webkit-input-placeholder {
   color: var(--red);
 }
 
-<<<<<<< HEAD
-.theme-light {
-  --primary: #325fff;
-  --primaryLight: #0f97ff;
-  --primaryDark: #212b36;
-  --gunmetal: #454f5b;
-  --battleshipGrey: #637381;
-  --blueyGrey: #919eab;
-  --lightBlueGrey: #c4cdd5;
-  --paleBlue: #dfe3e8;
-  --paleGrey: #f4f6f8;
-  --white: #fff;
-  --green: #19a560;
-  --yellow: #edc200;
-  --red: #ff3e3e;
-  --blue: #08aeea;
-  --faint-green: #19a560;
-  --faint-yellow: #fffceb;
-  --faint-red: #ffebeb;
-  --faint-blue: #eaf6fc;
-}
-
-.theme-black {
-  --primary: #ff3e3e;
-  --primaryLight: #0f97ff;
-  --primaryDark: #fff;
-  --gunmetal: #454f5b;
-  --battleshipGrey: #637381;
-  --blueyGrey: #19a560;
-  --lightBlueGrey: #c4cdd5;
-  --paleBlue: #dfe3e8;
-  --paleGrey: #f4f6f8;
-  --white: #212b36;
-  --green: #19a560;
-  --yellow: #edc200;
-  --red: #ff3e3e;
-  --blue: #08aeea;
-  --faint-green: #19a560;
-  --faint-yellow: #fffceb;
-  --faint-red: #ffebeb;
-  --faint-blue: #eaf6fc;
-=======
 .placeholder\:text-red:-ms-input-placeholder {
   color: var(--red);
 }
 
 .placeholder\:text-red::-ms-input-placeholder {
   color: var(--red);
->>>>>>> 42ee991f2fadaf8c81b5ccb96e0be2d65926cbe2
 }
 
 .placeholder\:text-red::placeholder {
@@ -5676,6 +5609,14 @@ body,
   visibility: hidden;
 }
 
+.group:hover .group-hover\:visible {
+  visibility: visible;
+}
+
+.group:hover .group-hover\:invisible {
+  visibility: hidden;
+}
+
 .whitespace-normal {
   white-space: normal;
 }
@@ -5942,6 +5883,12 @@ body,
   .container {
     max-width: 1200px;
   }
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }
 
 .border-box {
@@ -10157,6 +10104,14 @@ body,
   }
 
   .sm\:invisible {
+    visibility: hidden;
+  }
+
+  .group:hover .sm\:group-hover\:visible {
+    visibility: visible;
+  }
+
+  .group:hover .sm\:group-hover\:invisible {
     visibility: hidden;
   }
 
@@ -14481,6 +14436,14 @@ body,
     visibility: hidden;
   }
 
+  .group:hover .md\:group-hover\:visible {
+    visibility: visible;
+  }
+
+  .group:hover .md\:group-hover\:invisible {
+    visibility: hidden;
+  }
+
   .md\:w-0 {
     width: 0;
   }
@@ -18799,6 +18762,14 @@ body,
   }
 
   .lg\:invisible {
+    visibility: hidden;
+  }
+
+  .group:hover .lg\:group-hover\:visible {
+    visibility: visible;
+  }
+
+  .group:hover .lg\:group-hover\:invisible {
     visibility: hidden;
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Input, Paragraph, Icon } from '@/components/ui';
+import { Link, Paragraph } from '@/components/ui';
 import Logo from '@/components/common/logo';
 import MailSignup from '@/components/vendor/mail-signup';
 

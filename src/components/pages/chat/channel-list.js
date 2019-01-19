@@ -22,8 +22,10 @@ const ChannelList = ({ channels }) => {
 };
 
 ChannelList.propTypes = {
-  channels: PropTypes.object,
-  channelUUID: PropTypes.string,
+  channels: PropTypes.shapeOf({
+    getChannels: PropTypes.func,
+    loading: PropTypes.boolean,
+  }),
 };
 
 export default graphql(FETCH_CHANNELS, {

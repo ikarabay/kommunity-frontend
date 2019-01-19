@@ -44,6 +44,7 @@ class MessageList extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { listRef } = this.props;
+    const { scrollHeight } = this.state;
     const prevMessagesCount = _get(prevProps, 'messages.getMessagesForChannel.messages.length');
     const nextMessagesCount = _get(this.props, 'messages.getMessagesForChannel.messages.length');
     // initial fetch
@@ -54,7 +55,7 @@ class MessageList extends React.Component {
     // new message, while user is reading the latest messages
     else if (prevMessagesCount < nextMessagesCount) {
       if (listRef.current.scrollTop < 20) {
-        listRef.current.scrollTo(0, listRef.current.scrollHeight - this.state.scrollHeight);
+        listRef.current.scrollTo(0, listRef.current.scrollHeight - scrollHeight);
       } else {
         this.scrollToBottom();
       }
@@ -88,8 +89,8 @@ class MessageList extends React.Component {
           });
         },
         variables: {
-          cursor: messages.getMessagesForChannel.nextCursor,
           channelUUID,
+          cursor: messages.getMessagesForChannel.nextCursor,
         },
       });
     }
@@ -130,8 +131,11 @@ class MessageList extends React.Component {
 
 MessageList.propTypes = {
   channelUUID: PropTypes.string,
-  listRef: PropTypes.object,
-  messages: PropTypes.object,
+  listRef: PropTypes.instanceOf(PropTypes.node),
+  messages: PropTypes.shapeOf({
+    getMessagesForChannel: PropTypes.func,
+    subscribeToMore: PropTypes.func,
+  }),
 };
 
 export default graphql(FETCH_MESSAGES, {

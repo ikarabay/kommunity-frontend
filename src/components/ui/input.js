@@ -66,7 +66,6 @@ class UIInput extends React.Component {
       initialValue,
       id,
       extraWrapperClassName,
-      htmlRef,
       required,
       pattern,
       smallLeading,
@@ -125,7 +124,6 @@ class UIInput extends React.Component {
         <div className={wrapperClass}>
           {iconLeftElem}
           <input
-            ref={htmlRef}
             placeholder={placeholder}
             type={type}
             className={inputClass}
@@ -171,7 +169,6 @@ UIInput.propTypes = {
   extraClassName: PropTypes.string,
   extraWrapperClassName: PropTypes.string,
   helpText: PropTypes.string,
-  htmlRef: PropTypes.object,
   iconLeft: PropTypes.element,
   iconRight: PropTypes.element,
   id: PropTypes.string.isRequired,

@@ -14,8 +14,8 @@ const httpLink = new HttpLink({
   fetch,
   // TODO make it work for windows
   // uri: 'http://192.168.99.100:4000/gql',
-  uri: 'https://staging-api.kommunity.app/gql',
-  // uri: 'http://localhost:3008/gql',
+  // uri: 'https://staging-api.kommunity.app/gql',
+  uri: 'http://localhost:3008/gql',
 });
 
 // Create a WebSocket link:
@@ -27,8 +27,8 @@ if (process.env.BUILD_TARGET === 'client') {
     },
     // TODO make it work for windows
     // uri: 'ws://192.168.99.100:3008/graphql-subscriptions',
-    uri: 'wss://staging-api.kommunity.app/graphql-subscriptions',
-    // uri: 'ws://localhost:3008/graphql-subscriptions',
+    // uri: 'wss://staging-api.kommunity.app/graphql-subscriptions',
+    uri: 'ws://localhost:3008/graphql-subscriptions',
   });
 }
 

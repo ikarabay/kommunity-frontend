@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, Input } from '@/components/ui';
 import { SEND_MESSAGE } from '../requests';
 
-export class ChatInput extends React.Component {
+class ChatInput extends React.Component {
   state = {
     message: '',
   };

@@ -18,7 +18,6 @@ import CheckboxGroup from './checkbox-group';
 import Switch from './switch';
 import Notification from './notification';
 import Popup from './popup';
-import Loading from './loading';
 import Tooltip from './tooltip';
 
 export {
