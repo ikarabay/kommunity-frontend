@@ -114,9 +114,11 @@ class MessageList extends React.Component {
               .map(m => (
                 <div key={m.uuid} className="group py-2">
                   <div className="flex text-lightBlueGrey group">
-                    <div className="flex-1">{m.sender}</div>
+                    <div className="flex-1">
+                      {m.sender.firstName} {m.sender.lastName}
+                    </div>
                     <div className="text-xs invisible group-hover:visible">
-                      {moment(parseInt(m.ts, 10)).format(TIMESTAMP_FORMAT)}
+                      {moment(m.createdAt, moment.defaultFormat).format(TIMESTAMP_FORMAT)}
                     </div>
                   </div>
                   <div>{m.text}</div>

@@ -5,6 +5,8 @@ import React from 'react';
 import { Icon, Input } from '@/components/ui';
 import { SEND_MESSAGE } from '../requests';
 
+const SENDER_UUID = '3346776a-d69d-11e8-9f8b-f2801f1b9fd1';
+
 class ChatInput extends React.Component {
   state = {
     message: '',
@@ -24,14 +26,14 @@ class ChatInput extends React.Component {
 
   sendMessage = () => {
     const { message } = this.state;
-    const { channelUUID, sendMessage, username } = this.props;
+    const { channelUUID, sendMessage } = this.props;
     if (!message.trim()) {
       return;
     }
     sendMessage({
       variables: {
         channelUUID,
-        sender: username,
+        senderUUID: SENDER_UUID,
         text: message,
       },
     })
@@ -49,7 +51,7 @@ class ChatInput extends React.Component {
     return (
       <div className="w-full">
         <Input
-          htmlRef={this.inputRef}
+          setRef={this.inputRef}
           onChange={e => this.setState({ message: e.target.value })}
           extraClassName="w-full block"
           name="message-input"
@@ -68,7 +70,6 @@ class ChatInput extends React.Component {
 ChatInput.propTypes = {
   channelUUID: PropTypes.string,
   sendMessage: PropTypes.func,
-  username: PropTypes.string,
 };
 
 export default graphql(SEND_MESSAGE, {
