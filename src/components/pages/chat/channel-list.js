@@ -24,7 +24,7 @@ const ChannelList = ({ channels }) => {
 ChannelList.propTypes = {
   channels: PropTypes.shape({
     getChannels: PropTypes.func,
-    loading: PropTypes.boolean,
+    loading: PropTypes.bool,
   }),
 };
 
