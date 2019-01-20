@@ -68,6 +68,7 @@
     "redux-thunk": "^2.3.0",
     "serialize-javascript": "^1.5.0",
     "slick-carousel": "^1.8.1",
+    "store": "^2.0.12",
     "subscriptions-transport-ws": "^0.9.15"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@ const MailSignup = () => {
       <Paragraph>Subscribe to our updates</Paragraph>
       <Input
         extraClassName="w-full block"
+        id="subscribe-mail"
         name="email"
         type="email"
         placeholder="Your mail adress"
