@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Button, Icon, Popup } from '@/components/ui';
+import { Link, Button, Icon, Input, Title, Paragraph, Popup } from '@/components/ui';
 import throttle from 'lodash.throttle';
 import cls from 'classnames';
 import i18n from '@/i18n';
@@ -172,7 +172,7 @@ class Header extends React.Component {
     };
 
     let popupContent;
-
+    
     if (shownPopup === 'showLogin') {
       popupContent = {
         form: <LoginForm />,
