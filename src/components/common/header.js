@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Button, Icon, Input, Title, Paragraph, Popup } from '@/components/ui';
+import { Link, Button, Icon, Popup } from '@/components/ui';
 import throttle from 'lodash.throttle';
 import cls from 'classnames';
 import i18n from '@/i18n';
 import Logo from '@/components/common/logo';
-import LoginForm from '@/components/pages/login/login-form';
+import LoginForm from '@/containers/pages/login/login-form';
 import SignupForm from '@/components/pages/login/signup-form';
 import RequestResetPasswordForm from '@/components/pages/login/request-reset-password-form';
 import FormTemplate from './form-template';
@@ -172,7 +172,7 @@ class Header extends React.Component {
     };
 
     let popupContent;
-    
+
     if (shownPopup === 'showLogin') {
       popupContent = {
         form: <LoginForm />,

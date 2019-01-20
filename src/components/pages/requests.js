@@ -1,5 +1,15 @@
 import gql from 'graphql-tag';
 
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      uuid
+      email
+      token
+    }
+  }
+`;
+
 export const FETCH_COMMUNITY_MEMBERS = gql`
   query getCommunityMembers($uuid: ID!) {
     getCommunityMembers(uuid: $uuid) {

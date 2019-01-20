@@ -1,19 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Button, Input, Notification, Icon } from '@/components/ui';
-import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo';
-import { setCookie } from '@/api/local-storage';
-
-const LOGIN_MUTATION = gql`
-  mutation LOGIN_MUTATION($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      uuid
-      email
-      token
-    }
-  }
-`;
+import { setValue } from '@/api/local-storage';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -27,30 +16,24 @@ class LoginForm extends React.Component {
     };
   }
 
-  handleSubmit = async (e, login) => {
-    const { history } = this.props;
+  handleSubmit = async e => {
     e.preventDefault();
 
+    const { email, password } = this.state;
+    const { history, login } = this.props;
     this.setState({ disabled: true });
 
-    await login()
-      .then(response => {
-        setCookie('token', response.data.login.token);
-        this.setState({
-          error: '',
-        });
-        history.push('/boarding');
-      })
-      .catch(error => {
-        this.setState({
-          error,
-        });
-      })
-      .finally(() => {
-        this.setState({
-          disabled: false,
-        });
+    try {
+      const response = await login({ variables: { email, password } });
+      setValue('auth-token', response.data.login.token);
+      // TODO implement boarding page
+      history.push('/boarding');
+    } catch (error) {
+      this.setState({
+        disabled: false,
+        error,
       });
+    }
   };
 
   handleInputChange = e => {
@@ -63,49 +46,51 @@ class LoginForm extends React.Component {
     const { email, password, disabled, error } = this.state;
 
     return (
-      <Mutation mutation={LOGIN_MUTATION} variables={this.state}>
-        {login => (
-          <div>
-            {error && <Notification styleType="danger" text={error.message} flat />}
-            <form onSubmit={e => this.handleSubmit(e, login)}>
-              <Input
-                extraClassName="w-full block"
-                name="email"
-                type="text"
-                id="login-username"
-                placeholder="your username"
-                value={email}
-                onChange={this.handleInputChange}
-                required
-                iconLeft={<Icon name="User" className="text-lightBlueGrey" />}
-                extraWrapperClassName="my-4"
-              />
-              <Input
-                extraClassName="w-full block"
-                type="password"
-                name="password"
-                id="login-password"
-                placeholder="your password"
-                value={password}
-                onChange={this.handleInputChange}
-                required
-                iconLeft={<Icon name="Lock" className="text-lightBlueGrey" />}
-                extraWrapperClassName="my-4"
-              />
-              <Button
-                extraClassName="w-full block my-4 font-semibold"
-                size="large"
-                styleType="primary"
-                type="submit"
-                label={disabled ? '...' : 'Login'}
-                disabled={disabled}
-              />
-            </form>
-          </div>
-        )}
-      </Mutation>
+      <div>
+        {error && <Notification styleType="danger" text={error.message} flat />}
+        <form onSubmit={this.handleSubmit}>
+          <Input
+            extraClassName="w-full block"
+            name="email"
+            type="text"
+            id="login-username"
+            placeholder="your username"
+            value={email}
+            onChange={this.handleInputChange}
+            required
+            iconLeft={<Icon name="User" className="text-lightBlueGrey" />}
+            extraWrapperClassName="my-4"
+          />
+          <Input
+            extraClassName="w-full block"
+            type="password"
+            name="password"
+            id="login-password"
+            placeholder="your password"
+            value={password}
+            onChange={this.handleInputChange}
+            required
+            iconLeft={<Icon name="Lock" className="text-lightBlueGrey" />}
+            extraWrapperClassName="my-4"
+          />
+          <Button
+            extraClassName="w-full block my-4 font-semibold"
+            size="large"
+            styleType="primary"
+            type="submit"
+            label={disabled ? '...' : 'Login'}
+            disabled={disabled}
+          />
+        </form>
+      </div>
     );
   }
 }
 
-export default withRouter(Login);
+LoginForm.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  history: PropTypes.object,
+  login: PropTypes.func,
+};
+
+export default withRouter(LoginForm);
