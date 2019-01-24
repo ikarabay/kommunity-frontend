@@ -29,10 +29,11 @@ class LoginForm extends React.Component {
       onClose();
       // TODO implement boarding page
       // history.push('/boarding');
-    } catch (error) {
+    } catch (serverError) {
+      const error = serverError.graphQLErrors && serverError.graphQLErrors[0].message;
       this.setState({
         disabled: false,
-        error: error.graphQLErrors[0].message,
+        error: { message: error || 'Server is not responding.' },
       });
     }
   };

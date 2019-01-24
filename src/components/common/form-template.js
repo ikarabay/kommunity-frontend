@@ -40,7 +40,7 @@ const FormTemplate = props => {
 };
 
 FormTemplate.propTypes = {
-  Form: PropTypes.node,
+  Form: PropTypes.func,
   children: PropTypes.node,
   onClose: PropTypes.func,
   redirect: PropTypes.string,

@@ -40,13 +40,15 @@ class SignupForm extends React.Component {
 
   // make the actual call
   executeRequest = () => {
-    const { history, saveAuthToken, signup } = this.props;
+    const { onClose, signup, userLoggedIn } = this.props;
     const { email, password, captchaResponse } = this.state;
 
     signup({ variables: { captchaResponse, email, password } })
-      .then(response => {
-        saveAuthToken(response.data.signup);
-        history.push('/boarding');
+      .then(() => {
+        userLoggedIn();
+        onClose();
+        // TODO implement boarding page
+        // history.push('/boarding');
       })
       .catch(serverError => {
         const error = serverError.graphQLErrors && serverError.graphQLErrors[0].message;
@@ -159,9 +161,9 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  history: PropTypes.objectOf(PropTypes.any),
-  saveAuthToken: PropTypes.func,
+  onClose: PropTypes.func,
   signup: PropTypes.func,
+  userLoggedIn: PropTypes.func,
 };
 
 export default withRouter(SignupForm);

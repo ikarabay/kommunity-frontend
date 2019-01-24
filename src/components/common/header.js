@@ -322,14 +322,16 @@ class Header extends React.Component {
                 onClose={() => this.togglePopup('')}
               >
                 {shownPopup === 'showLogin' && (
-                  <Button
-                    extraClassName="block font-semibold"
-                    size="medium"
-                    styleType="plain"
-                    type="button"
-                    label="Forgot Your Password?"
-                    onClick={() => this.togglePopup('showResetPassword')}
-                  />
+                  <div className="flex justify-center">
+                    <Button
+                      extraClassName="block font-semibold"
+                      size="medium"
+                      styleType="plain"
+                      type="button"
+                      label="Forgot Your Password?"
+                      onClick={() => this.togglePopup('showResetPassword')}
+                    />
+                  </div>
                 )}
               </FormTemplate>
             </Popup>
