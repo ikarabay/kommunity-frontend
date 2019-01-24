@@ -1,16 +1,11 @@
 import React from 'react';
-import MemoryRouter from 'react-router-dom/MemoryRouter';
 
-import { shallow } from 'enzyme';
+import { mount } from '../../test-utils/render';
 import LoginForm from '@/components/pages/login';
 
 describe('Components: <Login />', () => {
   test('renders without exploding', () => {
-    const wrapper = shallow(
-      <MemoryRouter>
-        <LoginForm />
-      </MemoryRouter>,
-    );
+    const wrapper = mount(<LoginForm />);
     expect(wrapper.html()).toContain('div');
   });
 });

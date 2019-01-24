@@ -1,15 +1,10 @@
 import React from 'react';
-import MemoryRouter from 'react-router-dom/MemoryRouter';
-import { shallow } from 'enzyme';
 import CommunityList from '@/components/pages/communities';
+import { mount } from '../../test-utils/render';
 
 describe('Components: <CommunityList />', () => {
   test('renders without exploding', () => {
-    const wrapper = shallow(
-      <MemoryRouter>
-        <CommunityList />
-      </MemoryRouter>,
-    );
+    const wrapper = mount(<CommunityList />);
     expect(wrapper.html()).toContain('div');
   });
 });
