@@ -15,8 +15,8 @@ const httpLink = new HttpLink({
   credentials: 'include',
   fetch,
   // TODO make it work for windows
-  // uri: 'http://192.168.99.100:4000/gql',
-  uri: 'https://staging-api.kommunity.app/gql',
+  // uri: 'http://192.168.99.100:4000/graphql',
+  uri: 'https://staging-api.kommunity.app/graphql',
   // uri: 'http://localhost:3008/graphql',
 });
 
