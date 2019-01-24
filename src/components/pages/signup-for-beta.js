@@ -91,7 +91,7 @@ class SignupBeta extends Component {
         <div className="container">
           <Header extraClassName="justify-between" inline>
             <Paragraph extraClassName="text-blueyGrey">
-              Beta program will launch as soon as possible
+              Beta program will launch soon, signup now!
             </Paragraph>
           </Header>
           <div className="flex mt-32">

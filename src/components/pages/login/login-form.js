@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { Button, Input, Notification, Icon } from '@/components/ui';
-import { setValue } from '@/api/local-storage';
 
+// TODO use captcha to block brute force
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -20,18 +20,20 @@ class LoginForm extends React.Component {
     e.preventDefault();
 
     const { email, password } = this.state;
-    const { history, login } = this.props;
+    const { login, onClose, userLoggedIn } = this.props;
     this.setState({ disabled: true });
 
     try {
-      const response = await login({ variables: { email, password } });
-      setValue('auth-token', response.data.login.token);
+      await login({ variables: { email, password } });
+      userLoggedIn();
+      onClose();
       // TODO implement boarding page
-      history.push('/boarding');
-    } catch (error) {
+      // history.push('/boarding');
+    } catch (serverError) {
+      const error = serverError.graphQLErrors && serverError.graphQLErrors[0].message;
       this.setState({
         disabled: false,
-        error,
+        error: { message: error || 'Server is not responding.' },
       });
     }
   };
@@ -88,9 +90,10 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  history: PropTypes.object,
+  // history: PropTypes.object,
   login: PropTypes.func,
+  onClose: PropTypes.func,
+  userLoggedIn: PropTypes.func,
 };
 
 export default withRouter(LoginForm);

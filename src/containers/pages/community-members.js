@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 
-import { FETCH_COMMUNITY_MEMBERS } from '@/components/pages/requests';
+import { FETCH_COMMUNITY_MEMBERS } from '@/api/apollo-requests';
 import CommunityMembers from '@/components/pages/community-members';
 
 const mapStateToProps = () => ({});

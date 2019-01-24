@@ -1,11 +1,35 @@
 import gql from 'graphql-tag';
 
+export const SIGNUP = gql`
+  mutation signup($email: String!, $password: String!, $captchaResponse: String!) {
+    signup(email: $email, password: $password, captchaResponse: $captchaResponse)
+  }
+`;
+
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+    login(email: $email, password: $password)
+  }
+`;
+
+export const LOGOUT = gql`
+  mutation logout {
+    logout
+  }
+`;
+
+export const FETCH_USER_DATA = gql`
+  query getLoggedInUserDetails {
+    getLoggedInUserDetails {
       uuid
       email
-      token
+      username
+      firstName
+      lastName
+      userAttributes
+      location
+      avatarUploadUuid
+      lastSeenAt
     }
   }
 `;

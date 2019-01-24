@@ -6,9 +6,13 @@ import rootReducer from './reducers';
 
 const setup = (history, preloadedState) => {
   const middlewareRouter = routerMiddleware(history);
+  // using composeEnhancers for redux dev tools
+  // eslint-disable-next-line no-underscore-dangle
+  // TODO enable back
+  // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     combineReducers({
-      ...rootReducer,
+      app: rootReducer,
       router: connectRouter(history),
     }),
     preloadedState,

@@ -32,7 +32,7 @@ UIParagraph.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   className: PropTypes.string,
   extraClassName: PropTypes.string,
-  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  style: PropTypes.object,
   type: PropTypes.string,
 };
 

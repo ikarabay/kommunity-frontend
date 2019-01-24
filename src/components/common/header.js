@@ -6,7 +6,8 @@ import cls from 'classnames';
 import i18n from '@/i18n';
 import Logo from '@/components/common/logo';
 import LoginForm from '@/containers/pages/login/login-form';
-import SignupForm from '@/components/pages/login/signup-form';
+import SignupForm from '@/containers/pages/login/signup-form';
+import { withAuthUser } from '@/containers/hoc/with-auth-user';
 import RequestResetPasswordForm from '@/components/pages/login/request-reset-password-form';
 import FormTemplate from './form-template';
 import NBSearchInput from '@/components/common/navbar-search-input';
@@ -115,7 +116,15 @@ class Header extends React.Component {
   };
 
   render() {
-    const { inline, children, extraClassName } = this.props;
+    const {
+      inline,
+      children,
+      extraClassName,
+      isLoggedIn,
+      logout,
+      logoutMutation,
+      user,
+    } = this.props;
     const {
       shownPopup,
       isMenuOpen,
@@ -175,7 +184,7 @@ class Header extends React.Component {
 
     if (shownPopup === 'showLogin') {
       popupContent = {
-        form: <LoginForm />,
+        form: LoginForm,
         redirect: "Don't have an account?",
         redirectAction: () => this.togglePopup('showSignup'),
         redirectLabel: 'Sign up now',
@@ -184,7 +193,7 @@ class Header extends React.Component {
       };
     } else if (shownPopup === 'showSignup') {
       popupContent = {
-        form: <SignupForm />,
+        form: SignupForm,
         redirect: 'Have an account?',
         redirectAction: () => this.togglePopup('showLogin'),
         redirectLabel: 'Log in now',
@@ -193,7 +202,7 @@ class Header extends React.Component {
       };
     } else if (shownPopup === 'showResetPassword') {
       popupContent = {
-        form: <RequestResetPasswordForm />,
+        form: RequestResetPasswordForm,
         redirect: 'Return to',
         redirectAction: () => this.togglePopup('showLogin'),
         redirectLabel: 'sign in',
@@ -259,22 +268,35 @@ class Header extends React.Component {
                     {/* TODO: replace div with IconButton component when it is deployed #72 icon button */}
                     {searchInputToggleElem}
                   </div>
-                  <div className={classes.buttonsWrapper}>
-                    <Button
-                      extraClassName={classes.buttonLogin}
-                      size="small"
-                      styleType="custom"
-                      label="Login"
-                      onClick={() => this.togglePopup('showLogin')}
-                    />
-                    <Button
-                      extraClassName={classes.buttonSignup}
-                      size="small"
-                      styleType="outline"
-                      label="Signup"
-                      onClick={() => this.togglePopup('showSignup')}
-                    />
-                  </div>
+                  {isLoggedIn && user ? (
+                    <div>
+                      {user.firstName || user.email}
+                      <Button
+                        extraClassName={classes.buttonLogin}
+                        size="small"
+                        styleType="plain"
+                        label="Logout"
+                        onClick={() => logout(logoutMutation)}
+                      />
+                    </div>
+                  ) : (
+                    <div className={classes.buttonsWrapper}>
+                      <Button
+                        extraClassName={classes.buttonLogin}
+                        size="small"
+                        styleType="custom"
+                        label="Login"
+                        onClick={() => this.togglePopup('showLogin')}
+                      />
+                      <Button
+                        extraClassName={classes.buttonSignup}
+                        size="small"
+                        styleType="outline"
+                        label="Signup"
+                        onClick={() => this.togglePopup('showSignup')}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className={classes.menuIcon}>
                   <Icon
@@ -293,20 +315,23 @@ class Header extends React.Component {
               <FormTemplate
                 title={popupContent.title}
                 subTitle={popupContent.subTitle}
-                form={popupContent.form}
+                Form={popupContent.form}
                 redirect={popupContent.redirect}
                 redirectLabel={popupContent.redirectLabel}
                 redirectAction={popupContent.redirectAction}
+                onClose={() => this.togglePopup('')}
               >
                 {shownPopup === 'showLogin' && (
-                  <Button
-                    extraClassName="block font-semibold"
-                    size="medium"
-                    styleType="plain"
-                    type="button"
-                    label="Forgot Your Password?"
-                    onClick={() => this.togglePopup('showResetPassword')}
-                  />
+                  <div className="flex justify-center">
+                    <Button
+                      extraClassName="block font-semibold"
+                      size="medium"
+                      styleType="plain"
+                      type="button"
+                      label="Forgot Your Password?"
+                      onClick={() => this.togglePopup('showResetPassword')}
+                    />
+                  </div>
                 )}
               </FormTemplate>
             </Popup>
@@ -321,6 +346,10 @@ Header.propTypes = {
   children: PropTypes.node,
   extraClassName: PropTypes.string,
   inline: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
+  logout: PropTypes.func,
+  logoutMutation: PropTypes.func,
+  user: PropTypes.object,
 };
 
-export default Header;
+export default withAuthUser(Header);

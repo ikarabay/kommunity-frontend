@@ -1,9 +1,9 @@
 import React from 'react';
-import { signup } from '@/api/request';
+import PropTypes from 'prop-types';
 import { Button, Input, Link, Paragraph, Icon, Notification } from '@/components/ui';
 import Recaptcha from 'react-google-recaptcha';
 import { RECAPTCHA_API_KEY, mailPattern } from '@/constants';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class SignupForm extends React.Component {
       inputError: {}, // frontend validation
       password: '',
       passwordRepeat: '',
-      response: null,
       serverError: null, // server validation
     };
 
@@ -41,16 +40,19 @@ class SignupForm extends React.Component {
 
   // make the actual call
   executeRequest = () => {
+    const { onClose, signup, userLoggedIn } = this.props;
     const { email, password, captchaResponse } = this.state;
 
-    signup(email, password, captchaResponse)
-      .then(response => this.setState({ response }))
+    signup({ variables: { captchaResponse, email, password } })
+      .then(() => {
+        userLoggedIn();
+        onClose();
+        // TODO implement boarding page
+        // history.push('/boarding');
+      })
       .catch(serverError => {
-        if (serverError.response) {
-          this.setState({ serverError });
-        } else {
-          this.setState({ serverError: { message: 'Server is not responding.' } });
-        }
+        const error = serverError.graphQLErrors && serverError.graphQLErrors[0].message;
+        this.setState({ serverError: { message: error || 'Server is not responding.' } });
       });
   };
 
@@ -76,13 +78,7 @@ class SignupForm extends React.Component {
   };
 
   render() {
-    const { email, password, passwordRepeat, response, inputError, serverError } = this.state;
-
-    // TODO bariscc: maybe we should redirect within handlesubmit and use browser history instead of this
-    if (response) {
-      return <Redirect to="/boarding" />;
-    }
-
+    const { email, password, passwordRepeat, inputError, serverError } = this.state;
     return (
       <div>
         {serverError && <Notification styleType="danger" text={serverError.message} flat />}
@@ -131,13 +127,16 @@ class SignupForm extends React.Component {
             iconLeft={<Icon name="Lock" className="text-lightBlueGrey" />}
             extraWrapperClassName="my-4"
           />
-          <Recaptcha
-            ref={this.captcha}
-            sitekey={RECAPTCHA_API_KEY}
-            size="invisible"
-            onChange={this.onVerify}
-            onErrored={this.onError}
-          />
+          <div className="flex justify-center">
+            <Recaptcha
+              ref={this.captcha}
+              sitekey={RECAPTCHA_API_KEY}
+              size="invisible"
+              badge="inline"
+              onChange={this.onVerify}
+              onErrored={this.onError}
+            />
+          </div>
           <Button
             extraClassName="w-full block my-4 font-semibold"
             size="large"
@@ -161,4 +160,10 @@ class SignupForm extends React.Component {
   }
 }
 
-export default SignupForm;
+SignupForm.propTypes = {
+  onClose: PropTypes.func,
+  signup: PropTypes.func,
+  userLoggedIn: PropTypes.func,
+};
+
+export default withRouter(SignupForm);
