@@ -92,7 +92,6 @@ Checkbox.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   size: PropTypes.oneOf(['small', 'medium']),
-  // eslint-disable-next-line react/forbid-prop-types
   value: PropTypes.any,
 };
 

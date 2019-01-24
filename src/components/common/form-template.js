@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 import { Title, Paragraph, Button } from '../ui';
 
 const FormTemplate = props => {
-  const { title, subTitle, form, children, redirect, redirectLabel, redirectAction } = props;
+  const {
+    title,
+    subTitle,
+    Form,
+    children,
+    onClose,
+    redirect,
+    redirectLabel,
+    redirectAction,
+  } = props;
   return (
     <React.Fragment>
       <div className="px-12 text-center">
@@ -11,7 +20,7 @@ const FormTemplate = props => {
           {title}
         </Title>
         <Paragraph extraClassName="text-gunmetal mb-10">{subTitle}</Paragraph>
-        {form}
+        <Form onClose={onClose} />
       </div>
       {children} {/* what if we want something after form? yes, we can use children for that. */}
       {redirect && (
@@ -31,8 +40,9 @@ const FormTemplate = props => {
 };
 
 FormTemplate.propTypes = {
+  Form: PropTypes.node,
   children: PropTypes.node,
-  form: PropTypes.node,
+  onClose: PropTypes.func,
   redirect: PropTypes.string,
   redirectAction: PropTypes.func,
   redirectLabel: PropTypes.string,

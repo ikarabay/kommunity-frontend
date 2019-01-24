@@ -2,8 +2,8 @@ import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import { userLoggedIn } from '@/state/actions/user';
-import { LOGIN } from '@/api/apollo-requests';
-import LoginForm from '@/components/pages/login/login-form';
+import { SIGNUP } from '@/api/apollo-requests';
+import SignupForm from '@/components/pages/login/signup-form';
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = dispatch => ({
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(graphql(LOGIN, { name: 'login' })(LoginForm));
+)(graphql(SIGNUP, { name: 'signup' })(SignupForm));

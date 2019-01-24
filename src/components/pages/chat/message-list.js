@@ -6,7 +6,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Loading } from '@/components/ui';
-import { FETCH_MESSAGES, SUBSCRIBE_MESSAGE_SENT } from '../requests';
+import { FETCH_MESSAGES, SUBSCRIBE_MESSAGE_SENT } from '@/api/apollo-requests';
 
 const TIMESTAMP_FORMAT = 'MM/DD/YYYY h:mm';
 

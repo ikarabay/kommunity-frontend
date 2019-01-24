@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '@/components/common/header';
+import Header from '@/containers/common/header';
 import Footer from '@/components/common/footer';
 
 import HomeHero from './home/hero';

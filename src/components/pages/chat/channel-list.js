@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Loading } from '@/components/ui';
-import { FETCH_CHANNELS } from '../requests';
+import { FETCH_CHANNELS } from '@/api/apollo-requests';
 
 const ChannelList = ({ channels }) => {
   if (!channels.getChannels) {

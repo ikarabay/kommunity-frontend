@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import _get from 'lodash.get';
 import express from 'express';
+import CookieParser from 'cookie-parser';
 import { renderToString } from 'react-dom/server';
 import { createMemoryHistory } from 'history';
 import serialize from 'serialize-javascript';
@@ -33,9 +34,16 @@ if (process.env.NODE_ENV !== 'test') {
 }
 server.disable('x-powered-by');
 server.use(express.static(publicDir));
+server.use(CookieParser());
 server.get('/*', async (req, res) => {
   // STORE
-  const preloadedState = {};
+  const preloadedState = {
+    app: {
+      user: {
+        isLoggedIn: Boolean(req.cookies.authorization),
+      },
+    },
+  };
   const history = createMemoryHistory();
   const store = setupStore(history, preloadedState);
   const context = {};

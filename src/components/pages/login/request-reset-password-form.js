@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import { Button, Input, Icon, Notification } from '@/components/ui';
-import { forgotPassword } from '@/api/request';
 import { mailPattern } from '@/constants';
 
 class RequestResetPasswordForm extends React.Component {
@@ -19,14 +18,15 @@ class RequestResetPasswordForm extends React.Component {
   }
 
   handleSubmit = e => {
-    const { email } = this.state;
+    // const { email } = this.state;
     e.preventDefault();
 
     this.setState({ disabled: true, serverError: null });
 
-    forgotPassword(email)
-      .then(response => this.setState({ disabled: false, response }))
-      .catch(error => this.setState({ disabled: false, serverError: error }));
+    // TODO use graphql
+    // forgotPassword(email)
+    //   .then(response => this.setState({ disabled: false, response }))
+    //   .catch(error => this.setState({ disabled: false, serverError: error }));
   };
 
   handleInputChange = e => {

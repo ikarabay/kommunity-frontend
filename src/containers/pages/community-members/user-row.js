@@ -1,7 +1,7 @@
 import { compose, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
-import { CHANGE_ROLE, CHANGE_STATUS } from '@/components/pages/requests';
+import { CHANGE_ROLE, CHANGE_STATUS } from '@/api/apollo-requests';
 import UserRow from '@/components/pages/community-members/user-row';
 
 const mapStateToProps = () => ({});

@@ -117,7 +117,6 @@ Dropdown.propTypes = {
   onSelect: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.object),
   placeholder: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
   selectedOption: PropTypes.object,
 };
 

@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Icon, Input } from '@/components/ui';
-import { SEND_MESSAGE } from '../requests';
+import { SEND_MESSAGE } from '@/api/apollo-requests';
 
 const SENDER_UUID = '3346776a-d69d-11e8-9f8b-f2801f1b9fd1';
 
