@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import cls from 'classnames';
+import PropTypes from 'prop-types';
 import Header from '../common/header';
-import { Title, Paragraph, Button, Input, Popup } from '@/components/ui';
+import { Title, Paragraph, Button, Input } from '@/components/ui';
+import MailSignupSuccess from '@/components/common/popup-mail-signup-success';
 import { mailPattern } from '@/constants';
 
 const commonStyles = {
@@ -40,7 +41,6 @@ const backgroundElements = [
 ];
 
 const styles = {
-  shareButtons: 'w-full mx-2 h-14 font-bold',
   subscribeButton:
     'absolute text-white font-bold w-4/12 pin-r pin-t h-full bg-primary rounded-tr-full rounded-br-full',
   subscribeInput:
@@ -59,10 +59,17 @@ class SignupBeta extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { email } = this.state;
+    const { subscribeToMailList } = this.props;
 
-    this.setState({
-      showPopup: true,
-    });
+    subscribeToMailList({ variables: { email } })
+      .then(() =>
+        this.setState({
+          email: '',
+          showPopup: true,
+        }),
+      )
+      .catch(() => {});
   };
 
   handleInputChange = e => {
@@ -115,7 +122,7 @@ class SignupBeta extends Component {
                     onChange={this.handleInputChange}
                     pattern={mailPattern}
                     extraClassName={styles.subscribeInput}
-                    placeholder="Mail Address"
+                    placeholder="Your mail adress"
                   />
                   <Button
                     extraClassName={styles.subscribeButton}
@@ -136,34 +143,14 @@ class SignupBeta extends Component {
             </div>
           </div>
         </div>
-        <Popup show={showPopup} wrapperExtraClassName="text-center" onClose={this.onClosePopup}>
-          <img className="pointer-events-none" src="/images/landing/window.svg" alt="Hey!" />
-          <Title type="h5" extraClassName="font-extrabold mt-6 mb-2">
-            Thanks for signing up!
-          </Title>
-          <Paragraph extraClassName="mb-8">Show some love for makers :)</Paragraph>
-          <div className="buttons flex justify-around">
-            <Button
-              extraClassName={cls(styles.shareButtons, 'bg-twitter')}
-              styleType="primary"
-              size="medium"
-              label="Tweet"
-              type="button"
-              iconLeft="Twitter"
-            />
-            <Button
-              extraClassName={cls(styles.shareButtons, 'bg-facebook')}
-              styleType="primary"
-              size="medium"
-              label="Share"
-              type="button"
-              iconLeft="Facebook"
-            />
-          </div>
-        </Popup>
+        <MailSignupSuccess showPopup={showPopup} onClosePopup={this.onClosePopup} />
       </React.Fragment>
     );
   }
 }
+
+SignupBeta.propTypes = {
+  subscribeToMailList: PropTypes.func,
+};
 
 export default SignupBeta;

@@ -1,5 +1,11 @@
 import gql from 'graphql-tag';
 
+export const SUBSCRIBE_TO_MAIL_LIST = gql`
+  mutation subscribeToMailList($email: String!) {
+    subscribeToMailList(email: $email)
+  }
+`;
+
 export const SIGNUP = gql`
   mutation signup($email: String!, $password: String!, $captchaResponse: String!) {
     signup(email: $email, password: $password, captchaResponse: $captchaResponse)

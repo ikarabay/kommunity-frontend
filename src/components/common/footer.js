@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Paragraph } from '@/components/ui';
 import Logo from '@/components/common/logo';
-import MailSignup from '@/components/vendor/mail-signup';
+import MailSignup from './footer-mail-signup';
 
 const classes = {
   caption: 'leading-base text-blueyGrey text-xs mb-6 uppercase tracking-tight',
@@ -21,7 +21,6 @@ IN CASE NUMBER OF CITIES CHANGES: you need to update the app.css line 32 as well
 duration is the amount of time a city appears and fades,
 can be changed to any value, doesn't require any other update.
 */
-
 const cities = ['Istanbul', 'San Francisco', 'Seattle'];
 const duration = 3; // seconds
 const style = {
@@ -33,7 +32,7 @@ const style = {
   },
 };
 
-const Footer = () => {
+const Footer = ({ subscribeToMailList }) => {
   return (
     <div>
       <div className="flex py-10">
@@ -81,7 +80,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="w-1/4 mr-auto">
-          <MailSignup />
+          <MailSignup subscribeToMailList={subscribeToMailList} />
         </div>
       </div>
       <div className="flex justify-between border-t py-10 border-pale-blue w-10/12 mx-auto">

@@ -2,7 +2,7 @@ import React from 'react';
 import CommunityCard from '@/components/common/cards/community-card';
 import UserCard from '@/components/common/cards/user-card';
 import Header from '@/components/common/header';
-import Footer from '@/components/common/footer';
+import Footer from '@/containers/common/footer';
 
 const style = {
   container: {

@@ -11,7 +11,7 @@ import CommunitySettings from '@/containers/pages/community-settings';
 import CommunityMembers from '@/containers/pages/community-members';
 import Error404 from '@/containers/pages/404';
 import ResetPassword from '@/components/pages/reset-password';
-import SignupBeta from '@/components/pages/signup-for-beta';
+import SignupBeta from '@/containers/pages/signup-for-beta';
 import '@/css';
 
 const App = () => (
