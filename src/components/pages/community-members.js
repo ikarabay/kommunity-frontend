@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Footer from '@/components/common/footer';
+import Footer from '@/containers/common/footer';
 import Header from '@/components/common/header';
 import { Loading, Title, Button, Paragraph, Card } from '@/components/ui';
 import UserRow from '@/containers/pages/community-members/user-row';

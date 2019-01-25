@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card, Title } from '@/components/ui';
 import Header from '@/components/common/header';
-import Footer from '@/components/common/footer';
+import Footer from '@/containers/common/footer';
 import LoginForm from './login/login-form';
 import SignupForm from './login/signup-form';
 

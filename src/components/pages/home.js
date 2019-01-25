@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '@/containers/common/header';
-import Footer from '@/components/common/footer';
+import Footer from '@/containers/common/footer';
 
 import HomeHero from './home/hero';
 import FeaturedCommunities from '@/containers/pages/home/featured-communities';

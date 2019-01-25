@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '@/components/common/header';
-import Footer from '@/components/common/footer';
+import Footer from '@/containers/common/footer';
 import MostActiveMembers from '@/components/common/most-active-members';
 
 const CommunityDiscover = () => {
