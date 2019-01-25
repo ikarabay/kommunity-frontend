@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { Icon, Input, Paragraph } from '@/components/ui';
 import MailSignupSuccess from '@/components/common/popup-mail-signup-success';
-import { mailPattern } from '@/constants';
+import { mailPattern, EMAIL_LIST_IDS } from '@/constants';
 
 class MailSignup extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class MailSignup extends Component {
     const { email } = this.state;
     const { subscribeToMailList } = this.props;
 
-    subscribeToMailList({ variables: { email } })
+    subscribeToMailList({ variables: { email, listId: EMAIL_LIST_IDS.BETA_SIGNUP } })
       .then(() =>
         this.setState({
           email: '',

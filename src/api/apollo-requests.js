@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const SUBSCRIBE_TO_MAIL_LIST = gql`
-  mutation subscribeToMailList($email: String!) {
-    subscribeToMailList(email: $email)
+  mutation subscribeToMailList($email: String!, $listId: String!) {
+    subscribeToMailList(email: $email, listId: $listId)
   }
 `;
 

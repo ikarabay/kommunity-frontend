@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../common/header';
 import { Title, Paragraph, Button, Input } from '@/components/ui';
 import MailSignupSuccess from '@/components/common/popup-mail-signup-success';
-import { mailPattern } from '@/constants';
+import { mailPattern, EMAIL_LIST_IDS } from '@/constants';
 
 const commonStyles = {
   backgroundRepeat: 'no-repeat',
@@ -62,7 +62,7 @@ class SignupBeta extends Component {
     const { email } = this.state;
     const { subscribeToMailList } = this.props;
 
-    subscribeToMailList({ variables: { email } })
+    subscribeToMailList({ variables: { email, listId: EMAIL_LIST_IDS.BETA_SIGNUP } })
       .then(() =>
         this.setState({
           email: '',
