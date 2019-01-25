@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link, Paragraph } from '@/components/ui';
 import Logo from '@/components/common/logo';
@@ -132,6 +133,10 @@ const Footer = ({ subscribeToMailList }) => {
       </div>
     </div>
   );
+};
+
+Footer.propTypes = {
+  subscribeToMailList: PropTypes.func,
 };
 
 export default Footer;
