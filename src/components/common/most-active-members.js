@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Loading } from '@/components/ui';
 
-const CommunityMostActiveMembers = ({ getMostActiveMembersRequest }) => {
-  const { getCommunityMostActiveMembers, loading, error } = getMostActiveMembersRequest;
-
+const MostActiveMembers = ({ communityUuid, mostActiveMembersRequest }) => {
+  const { mostActiveMembers, loading, error } = mostActiveMembersRequest;
   if (error) {
     return <p className="text-red">Error occured while fetching most active members.</p>;
   }
@@ -13,23 +12,23 @@ const CommunityMostActiveMembers = ({ getMostActiveMembersRequest }) => {
     return <Loading />;
   }
 
-  if (!getCommunityMostActiveMembers.length) {
-    return <p>No active users found, do you want to invite people?</p>;
-  }
-
   return (
-    <div>
-      {getCommunityMostActiveMembers.map(({ firstName, lastName, CommunityUser, uuid }) => (
-        <p key={uuid} className="py-4">
-          {firstName} {lastName} (reputation score: {CommunityUser.reputation})
-        </p>
+    <div className="w-full flex flex-wrap">
+      {mostActiveMembers.map(({ firstName, lastName, lastSeenAt, location, uuid }) => (
+        <div key={uuid} className="border-2 text-center p-4 w-112">
+          <p>{firstName}</p>
+          <p>{lastName}</p>
+          <p>{location}</p>
+          <p>{lastSeenAt}</p>
+          <p>{communityUuid}</p>
+        </div>
       ))}
     </div>
   );
 };
-
-CommunityMostActiveMembers.propTypes = {
-  getMostActiveMembersRequest: PropTypes.shape({
+MostActiveMembers.propTypes = {
+  communityUuid: PropTypes.string,
+  mostActiveMembersRequest: PropTypes.shape({
     error: PropTypes.bool,
     loading: PropTypes.bool,
     mostActiveMembers: PropTypes.arrayOf(
@@ -45,4 +44,4 @@ CommunityMostActiveMembers.propTypes = {
   }),
 };
 
-export default CommunityMostActiveMembers;
+export default MostActiveMembers;

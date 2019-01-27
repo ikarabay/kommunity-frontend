@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, graphql } from 'react-apollo';
-import CommunityMostActiveMembers from '@/components/pages/community-discover/most-active-members';
-import { FETCH_COMMUNITY_MOST_ACTIVE_USERS } from '@/api/apollo-requests';
+import MostActiveMembers from '@/components/common/most-active-members';
+import { FETCH_MOST_ACTIVE_USERS } from '@/api/apollo-requests';
 
 const mapStateToProps = () => ({});
 
@@ -12,12 +12,12 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  graphql(FETCH_COMMUNITY_MOST_ACTIVE_USERS, {
-    name: 'getMostActiveMembersRequest',
+  graphql(FETCH_MOST_ACTIVE_USERS, {
+    name: 'mostActiveMembersRequest',
     options: props => ({
       variables: {
         communityUuid: props.communityUuid,
       },
     }),
   }),
-)(CommunityMostActiveMembers);
+)(MostActiveMembers);
