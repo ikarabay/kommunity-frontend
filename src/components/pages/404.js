@@ -1,7 +1,7 @@
 import React from 'react';
 
-const NoMatch = () => {
-  return <div>No Match</div>;
+const Error404 = () => {
+  return <div className="p-8 text-center">Page not found, go back to home page.</div>;
 };
 
-export default NoMatch;
+export default Error404;
