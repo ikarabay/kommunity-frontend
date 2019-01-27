@@ -41,6 +41,8 @@ const getWindowOverrides = (req, store) => {
 
   return {
     __PRELOADED_STATE__: finalState,
+    backendURL: process.env.BACKEND_URL,
+    backendWSURL: process.env.BACKEND_WS_URL,
     i18n: {
       lang: initialLanguage,
       store: initialI18nStore,

@@ -37,7 +37,15 @@ cd kommunity-backend
 npm run start
 ```
 
-## 5. Navigate to homepage
+## 5. Verify backend url
+If you are using MacOS/Linux and running backend on `localhost`, go to **STEP 6**.
+
+#### **WINDOWS**:
+If you needed to use an IP address instead of `localhost`:
+- open `.env.development`
+- update BACKEND_URL and BACKEND_WS_URL accordingly
+
+## 6. Navigate to homepage
 All set! Open http://localhost:3000/ in your browser. You should see the homepage.
 
 # Other details
