@@ -1,6 +1,7 @@
 @import "./font.css";
 @import "./vendor/tailwind_output.css";
 @import "./vendor/slick-carousel.css";
+@import "./vendor/react-crop.css";
 
 .apost:before {
     content: "\201C";
@@ -66,6 +67,6 @@
     }
 }
 
-.shake {    
+.shake {
     -webkit-animation: shake 0.2s ease-in-out 0.2s  alternate;
 }

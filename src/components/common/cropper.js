@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCrop, { makeAspectCrop } from 'react-image-crop';
 import { Button } from '@/components/ui';
-import 'react-image-crop/dist/ReactCrop.css';
 
 class Cropper extends React.Component {
   constructor(props) {
