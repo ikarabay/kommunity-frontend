@@ -36,6 +36,40 @@ export const RESET_PASSWORD = gql`
   }
 `;
 
+export const SEARCH_USERS = gql`
+  query searchUsers($query: String!) {
+    searchUsers(query: $query) {
+      email
+      username
+      avatarUploadUuid
+      firstName
+      lastName
+    }
+  }
+`;
+
+export const SEARCH_COMMUNITIES = gql`
+  query searchCommunities($query: String!) {
+    searchCommunities(query: $query) {
+      name
+      tagline
+    }
+  }
+`;
+
+export const FETCH_MOST_ACTIVE_USERS = gql`
+  query getMostActiveMembers($communityUuid: ID) {
+    mostActiveMembers(communityUuid: $communityUuid) {
+      firstName
+      lastName
+      uuid
+      avatarUploadUuid
+      lastSeenAt
+      location
+    }
+  }
+`;
+
 export const FETCH_USER_DATA = gql`
   query getLoggedInUserDetails {
     getLoggedInUserDetails {
@@ -48,6 +82,19 @@ export const FETCH_USER_DATA = gql`
       location
       avatarUploadUuid
       lastSeenAt
+    }
+  }
+`;
+
+export const FETCH_POPULAR_COMMUNITIES = gql`
+  {
+    popularCommunities {
+      uuid
+      name
+      tagline
+      desc
+      location
+      userCount
     }
   }
 `;

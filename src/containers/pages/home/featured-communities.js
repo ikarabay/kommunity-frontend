@@ -1,26 +1,13 @@
-import React from 'react';
-import { Query } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import { connect } from 'react-redux';
+
+import { FETCH_POPULAR_COMMUNITIES } from '@/api/apollo-requests';
 import FeaturedCommunities from '@/components/pages/home/featured-communities';
-import Loading from '@/components/ui/loading';
-import { POPULAR_COMMUNITIES } from '@/containers/query';
 
-const FeaturedCommunitiesContainer = () => (
-  <Query query={POPULAR_COMMUNITIES}>
-    {({ loading, error, data }) => {
-      if (loading) {
-        return (
-          <div className="text-center my-3">
-            <Loading />
-          </div>
-        );
-      }
-      // TODO style error message
-      if (error) {
-        return <div className="text-center">Sorry, we couldnt fetch popular communities.</div>;
-      }
-      return <FeaturedCommunities communityList={data.popularCommunities} />;
-    }}
-  </Query>
-);
+const mapStateToProps = () => ({});
+const mapDispatchToProps = () => ({});
 
-export default FeaturedCommunitiesContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(graphql(FETCH_POPULAR_COMMUNITIES, { name: 'popularCommunitiesRequest' })(FeaturedCommunities));

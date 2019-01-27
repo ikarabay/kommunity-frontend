@@ -1,13 +1,17 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
-import { FETCH_MOST_ACTIVE_USERS } from '@/containers/query';
 import PropTypes from 'prop-types';
 import { Loading } from '@/components/ui';
 
-const MostActiveMembers = ({ communityUuid, getMostActiveMembers }) => {
-  const { mostActiveMembers, loading, error } = getMostActiveMembers;
-  if (error) return <p className="text-red">Error!!!</p>;
-  if (loading) return <Loading />;
+const MostActiveMembers = ({ communityUuid, mostActiveMembersRequest }) => {
+  const { mostActiveMembers, loading, error } = mostActiveMembersRequest;
+  if (error) {
+    return <p className="text-red">Error occured while fetching most active members.</p>;
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="w-full flex flex-wrap">
       {mostActiveMembers.map(({ firstName, lastName, lastSeenAt, location, uuid }) => (
@@ -24,7 +28,7 @@ const MostActiveMembers = ({ communityUuid, getMostActiveMembers }) => {
 };
 MostActiveMembers.propTypes = {
   communityUuid: PropTypes.string,
-  getMostActiveMembers: PropTypes.shape({
+  mostActiveMembersRequest: PropTypes.shape({
     error: PropTypes.bool,
     loading: PropTypes.bool,
     mostActiveMembers: PropTypes.arrayOf(
@@ -39,11 +43,5 @@ MostActiveMembers.propTypes = {
     ),
   }),
 };
-export default graphql(FETCH_MOST_ACTIVE_USERS, {
-  name: 'getMostActiveMembers',
-  options: props => ({
-    variables: {
-      communityUuid: props.communityUuid,
-    },
-  }),
-})(MostActiveMembers);
+
+export default MostActiveMembers;

@@ -1,10 +1,11 @@
 /* global document */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Icon } from '@/components/ui';
 import cls from 'classnames';
-import NBSearchResult from '@/containers/common/cards/navbar-search-result';
 import debounce from 'lodash.debounce';
+
+import { Input, Icon } from '@/components/ui';
+import NBSearchResults from '@/containers/common/navbar-search/results';
 
 const DEBOUNCE_TIME = 300;
 const TRANSITION_DURATION = '400ms';
@@ -39,7 +40,7 @@ class NBSearch extends React.Component {
         'w-full sm:w-10/12 sm:block': isSearchExpanded,
       },
       inputExtraClass: {
-        [`rounded-24 placeholder:text-battleshipGrey placeholder:opacity-100 sm:bg-paleGrey 
+        [`rounded-24 placeholder:text-battleshipGrey placeholder:opacity-100 sm:bg-paleGrey
         sm:focus:bg-paleGrey focus:border-lightBlueGrey sm:focus:shadow-none`]: true,
         'sm:hidden': !isSearchExpanded,
       },
@@ -96,7 +97,7 @@ class NBSearch extends React.Component {
           type="text"
           id="navbar-input"
         />
-        {isSearchExpanded && searchValue.length > 0 && <NBSearchResult queryText={searchValue} />}
+        {isSearchExpanded && searchValue.length > 0 && <NBSearchResults query={searchValue} />}
       </div>
     );
   }
