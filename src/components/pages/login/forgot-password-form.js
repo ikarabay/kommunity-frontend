@@ -1,16 +1,16 @@
-/* eslint-disable react/no-unused-state */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Button, Input, Icon, Notification } from '@/components/ui';
 import { mailPattern } from '@/constants';
 
-class RequestResetPasswordForm extends React.Component {
+class ForgotPasswordForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       disabled: false,
       email: '',
-      response: null,
-      serverError: null, // server error
+      error: '',
+      success: false,
     };
 
     // reference for invisible captcha
@@ -18,15 +18,22 @@ class RequestResetPasswordForm extends React.Component {
   }
 
   handleSubmit = e => {
-    // const { email } = this.state;
+    const { email } = this.state;
+    const { forgotPassword } = this.props;
     e.preventDefault();
 
-    this.setState({ disabled: true, serverError: null });
+    this.setState({ disabled: true, error: '', success: false });
 
-    // TODO use graphql
-    // forgotPassword(email)
-    //   .then(response => this.setState({ disabled: false, response }))
-    //   .catch(error => this.setState({ disabled: false, serverError: error }));
+    forgotPassword({ variables: { email } })
+      .then(() => this.setState({ disabled: false, email: '', success: true }))
+      .catch(serverError => {
+        const error = serverError.graphQLErrors.length && serverError.graphQLErrors[0].message;
+        this.setState({
+          disabled: false,
+          email: '',
+          error: error || 'Error occured, please try again later.',
+        });
+      });
   };
 
   handleInputChange = e => {
@@ -36,11 +43,17 @@ class RequestResetPasswordForm extends React.Component {
   };
 
   render() {
-    const { email, serverError, disabled } = this.state;
+    const { disabled, email, error, success } = this.state;
 
     return (
       <div>
-        {serverError && <Notification styleType="danger" text={serverError.message} flat />}
+        {error && <Notification styleType="danger" text={error} flat />}
+        {success && (
+          <Notification
+            styleType="success"
+            text="We just sent an email, please follow the instructions listed there to reset your password."
+          />
+        )}
         <form onSubmit={this.handleSubmit}>
           <Input
             extraClassName="w-full block"
@@ -67,4 +80,8 @@ class RequestResetPasswordForm extends React.Component {
   }
 }
 
-export default RequestResetPasswordForm;
+ForgotPasswordForm.propTypes = {
+  forgotPassword: PropTypes.func,
+};
+
+export default ForgotPasswordForm;

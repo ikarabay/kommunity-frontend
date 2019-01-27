@@ -38,7 +38,7 @@ const SignupForBetaSuccess = ({ showPopup, onClosePopup }) => (
 
 SignupForBetaSuccess.propTypes = {
   onClosePopup: PropTypes.func,
-  showPopup: PropTypes.func,
+  showPopup: PropTypes.bool,
 };
 
 export default SignupForBetaSuccess;

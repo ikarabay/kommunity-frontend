@@ -26,11 +26,14 @@ class LoginForm extends React.Component {
     try {
       await login({ variables: { email, password } });
       userLoggedIn();
-      onClose();
+      // only popups have onClose
+      if (onClose) {
+        onClose();
+      }
       // TODO implement boarding page
       // history.push('/boarding');
     } catch (serverError) {
-      const error = serverError.graphQLErrors && serverError.graphQLErrors[0].message;
+      const error = serverError.graphQLErrors.length && serverError.graphQLErrors[0].message;
       this.setState({
         disabled: false,
         error: { message: error || 'Server is not responding.' },

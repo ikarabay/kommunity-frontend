@@ -6,6 +6,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
+import { BACKEND_URL, BACKEND_WS_URL } from '@/constants';
 
 import { isServer } from '../utils';
 
@@ -14,10 +15,7 @@ const httpLink = new HttpLink({
   // required for auth cookies
   credentials: 'include',
   fetch,
-  // TODO make it work for windows
-  // uri: 'http://192.168.99.100:4000/graphql',
-  uri: 'https://staging-api.kommunity.app/graphql',
-  // uri: 'http://localhost:3008/graphql',
+  uri: BACKEND_URL,
 });
 
 // Create a WebSocket link:
@@ -27,10 +25,7 @@ if (process.env.BUILD_TARGET === 'client') {
     options: {
       reconnect: true,
     },
-    // TODO make it work for windows
-    // uri: 'ws://192.168.99.100:3008/graphql-subscriptions',
-    uri: 'wss://staging-api.kommunity.app/graphql-subscriptions',
-    // uri: 'ws://localhost:3008/graphql',
+    uri: BACKEND_WS_URL,
   });
 }
 

@@ -4,6 +4,7 @@ import { Title, Paragraph, Button } from '../ui';
 
 const FormTemplate = props => {
   const {
+    additionalProps,
     title,
     subTitle,
     Form,
@@ -20,7 +21,7 @@ const FormTemplate = props => {
           {title}
         </Title>
         <Paragraph extraClassName="text-gunmetal mb-10">{subTitle}</Paragraph>
-        <Form onClose={onClose} />
+        <Form onClose={onClose} {...additionalProps} />
       </div>
       {children} {/* what if we want something after form? yes, we can use children for that. */}
       {redirect && (
@@ -41,6 +42,7 @@ const FormTemplate = props => {
 
 FormTemplate.propTypes = {
   Form: PropTypes.func,
+  additionalProps: PropTypes.object,
   children: PropTypes.node,
   onClose: PropTypes.func,
   redirect: PropTypes.string,
