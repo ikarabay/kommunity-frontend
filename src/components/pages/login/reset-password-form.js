@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { withRouter } from 'react-router';
+
 import { Button, Input, Notification, Icon } from '@/components/ui';
 
 class ResetPasswordForm extends React.Component {
@@ -6,26 +9,40 @@ class ResetPasswordForm extends React.Component {
     super(props);
     this.state = {
       disabled: false,
+      error: '',
       password: '',
       retryPassword: '',
-      serverError: null, // server error
     };
   }
 
   handleSubmit = e => {
     const { retryPassword, password } = this.state;
+    const { history, resetPassword, token } = this.props;
     e.preventDefault();
 
-    this.setState({ serverError: null });
+    this.setState({ error: '' });
 
     if (retryPassword !== password) {
       const validationMessage = 'Passwords do not match.';
-      this.setState({
-        serverError: {
-          message: validationMessage,
-        },
+      return this.setState({
+        error: validationMessage,
       });
     }
+
+    return resetPassword({ variables: { newPassword: password, token } })
+      .then(() => {
+        this.setState({ disabled: false, password: '', retryPassword: '', success: true });
+        setTimeout(() => history.push('/login'), 3000);
+      })
+      .catch(serverError => {
+        const error = serverError.graphQLErrors.length && serverError.graphQLErrors[0].message;
+        this.setState({
+          disabled: false,
+          error: error || 'Error occured, please try again later.',
+          password: '',
+          retryPassword: '',
+        });
+      });
   };
 
   handleInputChange = e => {
@@ -35,11 +52,17 @@ class ResetPasswordForm extends React.Component {
   };
 
   render() {
-    const { password, retryPassword, disabled, serverError } = this.state;
+    const { disabled, error, password, retryPassword, success } = this.state;
 
     return (
       <div>
-        {serverError && <Notification styleType="danger" text={serverError.message} flat />}
+        {error && <Notification styleType="danger" text={error} flat />}
+        {success && (
+          <Notification
+            styleType="success"
+            text="Your password has been reset, redirecting you to login page in 3 seconds."
+          />
+        )}
         <form onSubmit={this.handleSubmit}>
           <Input
             extraClassName="w-full block"
@@ -79,4 +102,10 @@ class ResetPasswordForm extends React.Component {
   }
 }
 
-export default ResetPasswordForm;
+ResetPasswordForm.propTypes = {
+  history: PropTypes.object,
+  resetPassword: PropTypes.func,
+  token: PropTypes.string,
+};
+
+export default withRouter(ResetPasswordForm);

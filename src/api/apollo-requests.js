@@ -24,6 +24,18 @@ export const LOGOUT = gql`
   }
 `;
 
+export const FORGOT_PASSWORD = gql`
+  mutation forgotPassword($email: String!) {
+    forgotPassword(email: $email)
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation resetPassword($newPassword: String!, $token: String!) {
+    resetPassword(newPassword: $newPassword, token: $token)
+  }
+`;
+
 export const FETCH_USER_DATA = gql`
   query getLoggedInUserDetails {
     getLoggedInUserDetails {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input, Link, Paragraph, Icon, Notification } from '@/components/ui';
 import Recaptcha from 'react-google-recaptcha';
-import { RECAPTCHA_API_KEY, mailPattern } from '@/constants';
+import { RECAPTCHA_CLIENT_API_KEY, mailPattern } from '@/constants';
 import { withRouter } from 'react-router';
 
 class SignupForm extends React.Component {
@@ -51,7 +51,7 @@ class SignupForm extends React.Component {
         // history.push('/boarding');
       })
       .catch(serverError => {
-        const error = serverError.graphQLErrors && serverError.graphQLErrors[0].message;
+        const error = serverError.graphQLErrors.length && serverError.graphQLErrors[0].message;
         this.setState({ serverError: { message: error || 'Server is not responding.' } });
       });
   };
@@ -130,7 +130,7 @@ class SignupForm extends React.Component {
           <div className="flex justify-center">
             <Recaptcha
               ref={this.captcha}
-              sitekey={RECAPTCHA_API_KEY}
+              sitekey={RECAPTCHA_CLIENT_API_KEY}
               size="invisible"
               badge="inline"
               onChange={this.onVerify}

@@ -3,9 +3,9 @@ import { compose, graphql } from 'react-apollo';
 import Footer from '@/components/common/footer';
 import { SUBSCRIBE_TO_MAIL_LIST } from '@/api/apollo-requests';
 
-const mapStateToProps = () => {};
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = () => {};
+const mapDispatchToProps = () => ({});
 
 export default compose(
   connect(

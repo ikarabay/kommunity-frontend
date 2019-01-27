@@ -28,6 +28,29 @@ const publicDir = process.env.RAZZLE_PUBLIC_DIR || 'public';
 
 const server = express();
 
+const getWindowOverrides = (req, store) => {
+  const finalState = store.getState();
+  const initialI18nStore = {};
+  let initialLanguage;
+  if (req.i18n) {
+    req.i18n.languages.forEach(lang => {
+      initialI18nStore[lang] = req.i18n.services.resourceStore.data[lang];
+    });
+    initialLanguage = req.i18n.language;
+  }
+
+  return {
+    __PRELOADED_STATE__: finalState,
+    i18n: {
+      lang: initialLanguage,
+      store: initialI18nStore,
+    },
+    keys: {
+      recaptcha: process.env.RECAPTCHA_CLIENT_API_KEY,
+    },
+  };
+};
+
 if (process.env.NODE_ENV !== 'test') {
   // not using i18n middleware on test env
   server.use(i18nextMiddleware.handle(i18n));
@@ -60,22 +83,12 @@ server.get('/*', async (req, res) => {
   const markup = renderToString(<Root />);
 
   // Grab the initial state from our Redux store
-  const finalState = store.getState();
   const cssAssetUrl = _get(assets, 'client.css');
   const jsAssetUrl = _get(assets, 'client.js');
 
   if (context.url) {
     res.redirect(context.url);
   } else {
-    const initialI18nStore = {};
-    let initialLanguage;
-    if (req.i18n) {
-      req.i18n.languages.forEach(lang => {
-        initialI18nStore[lang] = req.i18n.services.resourceStore.data[lang];
-      });
-      initialLanguage = req.i18n.language;
-    }
-
     res.status(200).send(
       `
 <!doctype html>
@@ -91,17 +104,11 @@ server.get('/*', async (req, res) => {
       ? `<script src="${jsAssetUrl}" defer></script>`
       : `<script src="${jsAssetUrl}" defer crossorigin></script>`
   }
-  <script>
-    window.i18n = {
-      store: JSON.parse('${JSON.stringify(initialI18nStore)}'),
-      lang: '${initialLanguage}'
-    };
-  </script>
 </head>
 <body class="theme-light font-sans font-normal text-dark">
   <div id="root">${markup}</div>
     <script>
-      window.__PRELOADED_STATE__ = ${serialize(finalState)}
+      window.app = ${serialize(getWindowOverrides(req, store))};
     </script>
 </body>
 </html>`,

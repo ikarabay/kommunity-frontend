@@ -8,7 +8,7 @@ import Logo from '@/components/common/logo';
 import LoginForm from '@/containers/pages/login/login-form';
 import SignupForm from '@/containers/pages/login/signup-form';
 import { withAuthUser } from '@/containers/hoc/with-auth-user';
-import RequestResetPasswordForm from '@/components/pages/login/request-reset-password-form';
+import ForgotPasswordForm from '@/containers/pages/login/forgot-password-form';
 import FormTemplate from './form-template';
 import NBSearchInput from '@/components/common/navbar-search-input';
 
@@ -202,7 +202,7 @@ class Header extends React.Component {
       };
     } else if (shownPopup === 'showResetPassword') {
       popupContent = {
-        form: RequestResetPasswordForm,
+        form: ForgotPasswordForm,
         redirect: 'Return to',
         redirectAction: () => this.togglePopup('showLogin'),
         redirectLabel: 'sign in',

@@ -15,3 +15,11 @@ window.matchMedia =
       removeListener() {},
     };
   };
+
+// initial app state
+window.app = {
+  __PRELOADED_STATE__: {},
+  keys: {
+    recaptcha: '',
+  },
+};

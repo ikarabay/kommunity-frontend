@@ -13,7 +13,7 @@ import client from '@/api/apollo';
 
 const history = createBrowserHistory();
 // eslint-disable-next-line no-underscore-dangle
-const store = setupStore(history, window.__PRELOADED_STATE__);
+const store = setupStore(history, window.app.__PRELOADED_STATE__);
 
 hydrate(
   <ApolloProvider client={client}>
