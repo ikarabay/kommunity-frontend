@@ -57,15 +57,18 @@ export const SEARCH_COMMUNITIES = gql`
   }
 `;
 
-export const FETCH_MOST_ACTIVE_USERS = gql`
-  query getMostActiveMembers($communityUuid: ID) {
-    mostActiveMembers(communityUuid: $communityUuid) {
+export const FETCH_COMMUNITY_MOST_ACTIVE_USERS = gql`
+  query getCommunityMostActiveMembers($communityUuid: ID!) {
+    getCommunityMostActiveMembers(communityUuid: $communityUuid) {
       firstName
       lastName
       uuid
       avatarUploadUuid
       lastSeenAt
       location
+      CommunityUser {
+        reputation
+      }
     }
   }
 `;
@@ -112,6 +115,30 @@ export const FETCH_COMMUNITY_MEMBERS = gql`
           status
         }
       }
+    }
+  }
+`;
+
+export const FETCH_COMMUNITY_EVENTS = gql`
+  query getCommunityEvents($communityUuid: ID!, $limit: Int) {
+    getCommunityEvents(communityUuid: $communityUuid, limit: $limit) {
+      uuid
+      imageUuid
+      title
+      content
+      timeStart
+      timeEnd
+      timezone
+      location
+      venueName
+      address1
+      address2
+      city
+      state
+      zip
+      country
+      latitude
+      longitude
     }
   }
 `;
