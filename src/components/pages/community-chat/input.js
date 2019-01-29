@@ -1,11 +1,6 @@
-// TODO consider using dayjs instead
-import { graphql } from 'react-apollo';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Icon, Input } from '@/components/ui';
-import { SEND_MESSAGE } from '@/api/apollo-requests';
-
-const SENDER_UUID = '3346776a-d69d-11e8-9f8b-f2801f1b9fd1';
 
 class ChatInput extends React.Component {
   state = {
@@ -26,24 +21,21 @@ class ChatInput extends React.Component {
 
   sendMessage = () => {
     const { message } = this.state;
-    const { channelUUID, sendMessage } = this.props;
+    const { channelUuid, sendMessage } = this.props;
+
     if (!message.trim()) {
       return;
     }
+
     sendMessage({
       variables: {
-        channelUUID,
-        senderUUID: SENDER_UUID,
+        channelUuid,
         text: message,
       },
     })
       .then(() => this.setState({ message: '' }))
       // TODO handle error
       .catch(() => {});
-  };
-
-  setInputRef = node => {
-    this.inputRef = node;
   };
 
   render() {
@@ -68,10 +60,8 @@ class ChatInput extends React.Component {
 }
 
 ChatInput.propTypes = {
-  channelUUID: PropTypes.string,
+  channelUuid: PropTypes.string,
   sendMessage: PropTypes.func,
 };
 
-export default graphql(SEND_MESSAGE, {
-  name: 'sendMessage',
-})(ChatInput);
+export default ChatInput;

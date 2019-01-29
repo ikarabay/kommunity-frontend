@@ -2,7 +2,7 @@
 import React from 'react';
 
 import CommunityCard from '@/components/common/cards/community-card';
-import Header from '@/components/common/header';
+import Header from '@/containers/common/header';
 import Footer from '@/containers/common/footer';
 import { Button } from '@/components/ui';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '@/components/common/header';
+import Header from '@/containers/common/header';
 import Footer from '@/containers/common/footer';
 import { Card, Input, Title, TextArea, Button, Loading } from '@/components/ui';
 import Cropper from '@/components/common/cropper';
