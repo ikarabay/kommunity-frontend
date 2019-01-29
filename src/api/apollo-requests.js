@@ -162,12 +162,13 @@ export const CHANGE_STATUS = gql`
 `;
 
 export const FETCH_MESSAGES = gql`
-  query messages($channelUUID: String!, $cursor: Int) {
-    getMessagesForChannel(channelUUID: $channelUUID, cursor: $cursor) {
+  query messages($channelUuid: String!, $cursor: Int) {
+    getChatMessagesForChannel(channelUuid: $channelUuid, cursor: $cursor) {
       nextCursor
       messages {
-        channelUuid
         uuid
+        channelUuid
+        senderUuid
         sender {
           uuid
           firstName
@@ -183,8 +184,8 @@ export const FETCH_MESSAGES = gql`
 
 // TODO pass community uuid
 export const FETCH_CHANNELS = gql`
-  query channels($communityUUID: String!) {
-    getChannels(communityUUID: $communityUUID) {
+  query channels($communityUuid: String!) {
+    getChatChannels(communityUuid: $communityUuid) {
       uuid
       name
       desc
@@ -193,9 +194,11 @@ export const FETCH_CHANNELS = gql`
 `;
 
 export const SEND_MESSAGE = gql`
-  mutation sendMessage($channelUUID: String!, $senderUUID: String!, $text: String!) {
-    sendMessage(channelUUID: $channelUUID, senderUUID: $senderUUID, text: $text) {
+  mutation sendChatMessage($channelUuid: String!, $text: String!) {
+    sendChatMessage(channelUuid: $channelUuid, text: $text) {
       uuid
+      channelUuid
+      senderUuid
       sender {
         uuid
         firstName
@@ -209,10 +212,11 @@ export const SEND_MESSAGE = gql`
 `;
 
 export const SUBSCRIBE_MESSAGE_SENT = gql`
-  subscription messageSent($channelUUID: String!) {
-    messageSent(channelUUID: $channelUUID) {
+  subscription messageSent($channelUuid: String!) {
+    messageSent(channelUuid: $channelUuid) {
       channelUuid
       uuid
+      senderUuid
       sender {
         uuid
         firstName

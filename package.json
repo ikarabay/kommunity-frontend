@@ -12,8 +12,7 @@
     "check-travis": "NODE_ENV=test run-s -nl lint cover",
     "test": "cross-env NODE_ENV=test jest --config .jest.json --forceExit",
     "cover": "cross-env NODE_ENV=test jest --coverage --config .jest.json --forceExit",
-    "lint": "eslint src/ test/",
-    "lint-fix": "eslint --fix src/ test/",
+    "lint": "eslint --fix src/ test/",
     "prettier": "prettier --write **/*.js",
     "CONTAINER_SCRIPTS": "-------------------------------",
     "container:start": "docker-compose up --build --force-recreate -d && docker-compose logs -f",
@@ -24,7 +23,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run check-if-not-committed && npm run prettier && npm run lint-fix && npm run cover"
+      "pre-push": "npm run check-if-not-committed && npm run prettier && npm run lint && npm run cover"
     }
   },
   "dependencies": {

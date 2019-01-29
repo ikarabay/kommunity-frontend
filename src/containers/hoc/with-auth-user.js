@@ -26,7 +26,6 @@ export const withAuthUser = WrappedComponent => {
   const connectedWithAuthUser = compose(
     graphql(FETCH_USER_DATA, {
       name: 'userData',
-      skip: props => !props.isLoggedIn,
     }),
     connect(
       mapStateToProps,

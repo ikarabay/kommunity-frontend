@@ -3,7 +3,7 @@ import qs from 'query-string';
 import React from 'react';
 import { Redirect, withRouter } from 'react-router';
 
-import Header from '@/components/common/header';
+import Header from '@/containers/common/header';
 import { Button } from '@/components/ui';
 import ResetPasswordForm from '@/containers/pages/login/reset-password-form';
 import FormTemplate from '../common/form-template';
