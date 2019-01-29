@@ -68,7 +68,10 @@ class MessageList extends React.Component {
   componentDidUpdate(prevProps) {
     const { scrollHeight } = this.state;
     const prevMessagesCount = _get(prevProps, 'messages.getChatMessagesForChannel.messages.length');
-    const nextMessagesCount = _get(this.props, 'messages.getChatMessagesForChannel.messages.length');
+    const nextMessagesCount = _get(
+      this.props,
+      'messages.getChatMessagesForChannel.messages.length',
+    );
     // initial fetch
     if (prevMessagesCount === undefined && nextMessagesCount) {
       this.scrollToBottom();
