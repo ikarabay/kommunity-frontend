@@ -143,6 +143,22 @@ export const FETCH_COMMUNITY_EVENTS = gql`
   }
 `;
 
+export const FETCH_COMMUNITY_CONVERSATION_POSTS = gql`
+  query getCommunityConversationPosts($communityUuid: ID!, $limit: Int) {
+    getCommunityConversationPosts(communityUuid: $communityUuid, limit: $limit) {
+      uuid
+      authorUuid
+      attachmentUploadUuids
+      communityUuid
+      categoryUuid
+      parentUuid
+      content
+      title
+      viewCount
+    }
+  }
+`;
+
 export const CHANGE_ROLE = gql`
   mutation changeRole($userUuid: String!, $role: String!) {
     changeRole(userUuid: $userUuid, role: $role) {

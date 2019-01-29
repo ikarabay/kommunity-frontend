@@ -5,6 +5,7 @@ import Header from '@/containers/common/header';
 import Footer from '@/containers/common/footer';
 import CommunityEvents from '@/containers/pages/community-discover/events';
 import CommunityMostActiveMembers from '@/containers/pages/community-discover/most-active-members';
+import CommunityPosts from '@/containers/pages/community-discover/posts';
 
 const CommunityDiscover = ({
   match: {
@@ -23,16 +24,12 @@ const CommunityDiscover = ({
           </div>
           <div className="flex flex-wrap">
             <div className="w-6/12">
-              <h1>Latest Messages</h1>
-              <div>...</div>
+              <h1>Latest posts</h1>
+              <CommunityPosts communityUuid={communityUuid} />
             </div>
             <div className="w-6/12">
               <h1>Most Active Members</h1>
               <CommunityMostActiveMembers communityUuid={communityUuid} />
-            </div>
-            <div className="w-6/12">
-              <h1>Online Members</h1>
-              <div>...</div>
             </div>
             <div className="w-6/12">
               <h1>Events</h1>
